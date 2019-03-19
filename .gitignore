@@ -1,0 +1,13 @@
+
+# Logs
+/logs/*
+
+# Configs
+/config/database.php
+
+# Vendor
+/vendor/
+
+# IDEs and Editors
+*.sublime-project
+*.sublime-workspace
