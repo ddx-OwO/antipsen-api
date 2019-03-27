@@ -8,16 +8,13 @@
 
 namespace Antipsen\Database;
 
-use PDO;
-
-final class Database 
+class Database 
 {
-
-    private $pdo;
+    protected $connection;
 
     private $config;
 
-    private $responses;
+    private $pdo;
 
     /**
      * Constructor.
@@ -25,16 +22,25 @@ final class Database
     public function __construct() 
     {
         $this->config = require_once BASEPATH."/config/database.php";
-        $dsn = "mysql:host={$this->config['server_host']};dbname={$this->config['dbName']}";
-        $username = $this->config['username'];
-        $password = $this->config['password'];
-        try {
-            $this->pdo = new PDO($dsn, $username, $password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e)
+    }
+
+    public function load()
+    {
+        // No DB specified? Beat them senseless...
+        if (empty($this->config['db_driver']))
         {
-            echo "Connection failed: " . $e->getMessage();
+            throw new \InvalidArgumentException('You have not selected a database driver to connect to.');
         }
+
+        $className = strpos($this->config['db_driver'], '\\') === false
+            ? 'Antipsen\Database\\' . $this->config['db_driver'] . '\\Connection'
+            : $this->config['db_driver'] . '\\Connection';
+
+        $class = new $className($this->config);
+
+        // Store the connection
+        $this->connection = $class;
+
+        return $this->connection;
     }
 }

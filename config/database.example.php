@@ -2,9 +2,10 @@
 
 return [
     'server_host' => 'localhost',
-    'dbname' => 'antipsen_api',
+    'db_name' => 'antipsen_api',
+    'db_driver' => 'PDO',
     'charset' => 'utf8',
     'dbcollate' => 'utf8mb4_general_ci',
-    'username' => 'xxxxxxx',
-    'password' => 'xxxxxxx'
+    'username' => 'root',
+    'password' => 'xxxxxx'
 ];
