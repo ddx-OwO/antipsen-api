@@ -1,7 +1,5 @@
 <?php
 
-define("BASEPATH", realpath(__DIR__."/.."));
-
 return [
     'APP_ENV' => 'development',
 
@@ -15,7 +13,7 @@ return [
 
     'timezone' => 'Asia/Jakarta',
 
-    'enable_cors' => false,
+    'enable_cors' => TRUE,
 
     'cors_domain' => '*'
 ];

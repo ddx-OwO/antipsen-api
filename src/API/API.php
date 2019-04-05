@@ -1,10 +1,18 @@
 <?php
 
+/**
+ * @package Antipsen
+ * @author Cyber Six
+ * @copyright Copyright (c) 2019, Cyber Six, IT Club SMAN 6 Depok
+ * @license https://opensource.org/licenses/Apache-2.0 Apache License 2.0
+ * @since Version 0.1.0
+*/
+
 namespace Antipsen\API;
 
 use Error;
 use Exception;
-use Antipsen\Contracts\API\APIInterface;
+use Antipsen\API\Contracts\APIInterface;
 use Antipsen\API\APIFormat as Format;
 
 class API implements APIInterface
@@ -194,7 +202,7 @@ class API implements APIInterface
         self::HTTP_NETWORK_AUTHENTICATION_REQUIRED => 'Network Authentication Required'
     ];
 
-    public static function response($data, int $httpCode = NULL, bool $continue = NULL)
+    public static function response($data, int $httpCode = 200, bool $continue = FALSE)
     {
         ob_start();
 
@@ -204,6 +212,7 @@ class API implements APIInterface
             'code' => $httpCode,
             'data' => $data
         ]);
+        
         self::setStatusHeader($httpCode);
         echo $output->toJSON();
 

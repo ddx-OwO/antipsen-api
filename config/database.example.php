@@ -1,11 +1,12 @@
 <?php
 
 return [
-    'server_host' => 'localhost',
+    'hostname' => 'localhost',
+    'port' => 3306,
     'db_name' => 'antipsen_api',
-    'db_driver' => 'PDO',
+    'db_driver' => 'MySQLi',
     'charset' => 'utf8',
-    'dbcollate' => 'utf8mb4_general_ci',
+    'db_collat' => 'utf8mb4_general_ci',
     'username' => 'root',
-    'password' => 'xxxxxx'
+    'password' => ''
 ];

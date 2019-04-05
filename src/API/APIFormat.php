@@ -1,8 +1,16 @@
 <?php
 
+/**
+ * @package Antipsen
+ * @author Cyber Six
+ * @copyright Copyright (c) 2019, Cyber Six, IT Club SMAN 6 Depok
+ * @license https://opensource.org/licenses/Apache-2.0 Apache License 2.0
+ * @since Version 0.1.0
+*/
+
 namespace Antipsen\API;
 
-use Antipsen\Contracts\API\APIFormatInterface;
+use Antipsen\API\Contracts\APIFormatInterface;
 
 class APIFormat implements APIFormatInterface
 {
@@ -37,7 +45,7 @@ class APIFormat implements APIFormatInterface
             return json_encode($data, $this->jsonParameter);
         }
 
-        // We only honour a jsonp callback which are valid javascript identifiers
+        // Validate jsonp callback which are valid javascript identifiers
         elseif (preg_match('/^[a-z_\$][a-z0-9\$_]*(\.[a-z_\$][a-z0-9\$_]*)*$/i', $callback))
         {
             // Return the data as encoded json with a callback
@@ -45,7 +53,6 @@ class APIFormat implements APIFormatInterface
         }
 
         // An invalid jsonp callback function provided.
-        // Though I don't believe this should be hardcoded here
         $data['warning'] = 'INVALID JSONP CALLBACK: '.$callback;
 
         return json_encode($data, $this->jsonParameter);

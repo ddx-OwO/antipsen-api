@@ -8,12 +8,9 @@
  * @since Version 0.1.0
 */
 
-namespace Antipsen\API\Contracts;
+namespace Antipsen\Exceptions;
 
-interface APIInterface
+class DatabaseException extends \Error
 {
-    /**
-     * @return static
-     */
-    public static function response($data, int $httpCode, bool $continue);
+
 }

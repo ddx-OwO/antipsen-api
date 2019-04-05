@@ -1,46 +1,36 @@
 <?php
 
 /**
- * @author Dewa Andhika Putra <dewaandhika18@gmail.com>
- * @license MIT
- * @version 0.0.1
+ * @package Antipsen
+ * @author Cyber Six
+ * @copyright Copyright (c) 2019, Cyber Six, IT Club SMAN 6 Depok
+ * @license https://opensource.org/licenses/Apache-2.0 Apache License 2.0
+ * @since Version 0.1.0
 */
 
 namespace Antipsen\Database;
 
 class Database 
 {
-    protected $connection;
+    static protected $connection;
 
-    private $config;
-
-    private $pdo;
-
-    /**
-     * Constructor.
-     */
-    public function __construct() 
-    {
-        $this->config = require_once BASEPATH."/config/database.php";
-    }
-
-    public function load()
+    public static function load(array $config = [])
     {
         // No DB specified? Beat them senseless...
-        if (empty($this->config['db_driver']))
+        if (empty($config['db_driver']))
         {
             throw new \InvalidArgumentException('You have not selected a database driver to connect to.');
         }
 
-        $className = strpos($this->config['db_driver'], '\\') === false
-            ? 'Antipsen\Database\\' . $this->config['db_driver'] . '\\Connection'
-            : $this->config['db_driver'] . '\\Connection';
+        $className = strpos($config['db_driver'], '\\') === false
+            ? 'Antipsen\Database\\' . $config['db_driver'] . '\\Connection'
+            : $config['db_driver'] . '\\Connection';
 
-        $class = new $className($this->config);
+        $class = new $className($config);
 
         // Store the connection
-        $this->connection = $class;
+        self::$connection = $class;
 
-        return $this->connection;
+        return self::$connection;
     }
 }
