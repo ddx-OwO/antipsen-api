@@ -18,7 +18,7 @@ Untuk mengembangkan aplikasi ini, minimal dikomputer kalian harus terinstall:
 - Composer
 - PostMan
 
-Untuk PHP, MySQL/MariaDB, dan Apache bisa mendownload XAMPP karena XAMPP sudah mencakup 3 item tersebut. Kemudian untuk **Git** bisa di mendownload [Github for Desktop](https://desktop.github.com) atau [Git CLI](https://git-scm.com/downloads) dan untuk Composer bisa mendownload di [](https://getcomposer.org/).
+Untuk PHP, MySQL/MariaDB, dan Apache bisa mendownload XAMPP karena XAMPP sudah mencakup 3 item tersebut. Kemudian untuk **Git** bisa di mendownload [Github for Desktop](https://desktop.github.com) atau [Git CLI](https://git-scm.com/downloads) dan untuk Composer bisa mendownload di [https://getcomposer.org/](https://getcomposer.org/).
 
 ## Instalasi
 
@@ -38,8 +38,8 @@ Setelah sukses terinstall, buka file `app.example.php` dan save as `app.php` kem
 
 ## Feature
 
-- [] Absensi QR Code
-- [] Konfigurasi akses untuk user
+- [ ] Absensi QR Code
+- [ ] Konfigurasi akses untuk user
 
 ## License
 
