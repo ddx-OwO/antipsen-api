@@ -1,8 +1,5 @@
-
-# Logs
-/logs/*
-
 # Configs
+/config/app.php
 /config/database.php
 
 # Vendor

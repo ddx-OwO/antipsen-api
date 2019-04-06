@@ -1,40 +1,36 @@
 <?php
 
 /**
- * @author Dewa Andhika Putra <dewaandhika18@gmail.com>
- * @license MIT
- * @version 0.0.1
+ * @package Antipsen
+ * @author Cyber Six
+ * @copyright Copyright (c) 2019, Cyber Six, IT Club SMAN 6 Depok
+ * @license https://opensource.org/licenses/Apache-2.0 Apache License 2.0
+ * @since Version 0.1.0
 */
 
 namespace Antipsen\Database;
 
-use PDO;
-
-final class Database 
+class Database 
 {
+    static protected $connection;
 
-    private $pdo;
-
-    private $config;
-
-    private $responses;
-
-    /**
-     * Constructor.
-     */
-    public function __construct() 
+    public static function load(array $config = [])
     {
-        $this->config = require_once BASEPATH."/config/database.php";
-        $dsn = "mysql:host={$this->config['server_host']};dbname={$this->config['dbName']}";
-        $username = $this->config['username'];
-        $password = $this->config['password'];
-        try {
-            $this->pdo = new PDO($dsn, $username, $password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e)
+        // No DB specified? Beat them senseless...
+        if (empty($config['db_driver']))
         {
-            echo "Connection failed: " . $e->getMessage();
+            throw new \InvalidArgumentException('You have not selected a database driver to connect to.');
         }
+
+        $className = strpos($config['db_driver'], '\\') === false
+            ? 'Antipsen\Database\\' . $config['db_driver'] . '\\Connection'
+            : $config['db_driver'] . '\\Connection';
+
+        $class = new $className($config);
+
+        // Store the connection
+        self::$connection = $class;
+
+        return self::$connection;
     }
 }
